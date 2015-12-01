@@ -62,34 +62,26 @@
         <div class="col-xs-12 col-sm-9" data-spy="scroll" data-target="#sidebar-nav">
           
           
-          <h1 id="section1">Geocoding</h1>
+          <h1 id="section1">Maps</h1>
           
-          <h3>What is Geocoding?</h3>
-          <p>When you type an adress or place name into your map app, GIS or online map it shows you the location on the map and possibly gives you a list of other possible locations from the name you have typed. Geocoding is the process where these addresses are converted into spatial coordinates e.g. converting 'southampton' to the geographic coordinates of latitude 50.9 and longitude 1.4.</p>
+          <h3>Online Map Services</h3>
+          <p>There are quite a few online map services that offer maps (basemaps) and APIs to control maps that you can embed on your own pages. <a href="https://developers.google.com/maps/documentation/javascript/">Google</a>, <a href="https://www.microsoft.com/maps/choose-your-bing-maps-API.aspx">Bing</a>, OpenStreetMaps, <a href="https://www.mapbox.com/">Mapbox</a> are just some of the providers.</p>
 
-          <p>Reverse geocoding does the opposite of converting a geographic coordinate to a place name or address.</p>
+          <p>To enabled maps to be used in the browser, Javascript is necessary. Most of these map providers provide their own API however, there are Javascript libraries with extended functionality to create layers on top of these maps and whatever additional layers and functionality is built into the API. Some examples of libraries are the powerful <a href="http://openlayers.org/">OpenLayers</a>, lightweight <a href="http://leafletjs.com/">Leaflet</a> and <a href="http://openlayers.org/">Modest Maps</a> and even WebGL based 3D globe library <a href="http://cesiumjs.org/">Cesium</a>.</p>
 
-          <p>For example, geocoding 'University of Southampton' using Googles geocoding API gave the following result. 
+          <h3>Basemaps, Tiles, Vectors</h3>
 
-          <table class="table">
-            <tr><td>city:</td><td>Southampton</td></tr>
-            <tr><td>county/district:</td><td>Southampton</td></tr>
-            <tr><td>country:</td><td>United Kingdom</td></tr>
-            <tr><td>latitude, longitude:</td><td>50.936344, -1.39681</td></tr>
-          </table>
-          </p>
+          <p>Basemaps are the base layer of maps. Google for example, offers a choice of satellite/aerial maps and street maps layers as base maps. OpenStreetMaps (OSM) are focused on street maps as the base layer. Other providers like ESRI (ArcGIS) have good quality satellite/aerial/terrestrial base maps.</p>
 
-          <h3>How to do Geocoding?</h3>
+          <p>OpenStreetMaps for example is a huge collection of data - streets, buildings, etc. are represented as points and polygons (geometry) and are rendered as tiles and served through various online map services. MapBox, for example, uses OSM data and uses a custom rendering engine to create beautiful maps. MapBox has a <a href="https://www.mapbox.com/tilemill/">TileMill</a> software that runs on your local machine and allows you to create maps from OSM data, style the maps and render them as tiles or save them in a more efficient SQLLite based format. <a href="https://www.mapbox.com/mapbox-studio/">MapBox Studio</a> is a powerful online version that allows you to design your own maps.</p>
 
-          <p>Geocoding is offered by many online services. One means is to use Google Fusion Tables to do the <a href="https://support.google.com/fusiontables/answer/1012281?hl=en">geocoding of an address column</a>. <a href="https://developers.google.com/maps/documentation/geocoding/intro">Google Maps API</a> also offers geocoding. However, these services all have <a href="https://developers.google.com/maps/documentation/geocoding/usage-limits">usage limits</a> on the number of columns/requests sent for geocoding. </p>
+          <p>When Google Maps started, the state-of-the-art required maps to be served as tiles and the innovation was to use Javascript to enable people to drag and scroll to pan and zoom maps which in turn loaded tiles on the backend. Often, tile servers used simple folders with x,y,z labels to serve pre-rendered tiles. These servers (e.g. <a href="http://mapserver.org/">MapServer</a>) are still popular and a possible solution if you want to run your own map server. Tiles were rendered from vector to raster using libraries like <a href="http://mapnik.org/">MapNik</a> (still very much the best renderer nowadays) that made beautiful tiles but required lots of processing power.</p>
 
-          <p>Alternatives to Google (when not accessible) are <a href="https://www.mapbox.com/developers/api/geocoding/">Mapbox</a> and various <a href="http://www.programmableweb.com/news/7-free-geocoding-apis-google-bing-yahoo-and-mapquest/2012/06/21">other options</a> like MapQuest, Yahoo! PlaceFinder and Bing.</p>
+          <p>Google, however, has since moved to using vector maps rendered with the help of WebGL. This is a huge advancement since serving vector data is much more efficient than serving raster tiles. Client browsers are also much more capable of handling this rendering nowadays. This needs to be differentiated from rendering vectors as tiles and serving them on the fly as rasters. This is the 'heaviest' option in terms of processing and is usually only possible for simple maps. An example of such a server is <a href="http://geoserver.org/">GeoServer</a>. GeoServer is very useful for serving vector layers above the base map layer though.</p>
 
-          <p>However, if you needed to geocode a large batch of sensor data at once, all of the online services would limit the rate for non-paying plans. A reasonable alternative is to setup your own geocoder, which though not as powerful and refined as googles' will still provide decent results.</p>
-    
-          <h3>Gisgraphy</h3>
-          <p><a href="http://www.gisgraphy.com/gisgraphy_v_3_0.htm">Gisgraphy</a> is an open source Geocoding server which uses data from geonames (a lookup list of place names to spatial coordinates) and open street maps (POI - places of interest: detailed street names, polygons, place names, etc.). If you setup Gisgraphy locally, you can do large batches of geocoding without worrying about limits.</p>
-          <p>An example gisgraphy setup has been done on the <a href="http://sotonwo.cloudapp.net:8080/">sotowo.cloudapp.net</a> server.</p>
+          <h3>Vector Layers</h3>
+
+          <h3>Raster Layers</h3>
 
           <div class="clearfix"></div>
           
