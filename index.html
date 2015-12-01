@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta charset="utf-8">
+        <title>Working with Sensor Data</title>
+        <meta name="generator" content="Bootply">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="assets/css/bootstrap.css" rel="stylesheet">
+        
+        <!--[if lt IE 9]>
+          <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+		
+		<link href="assets/css/holo.css" rel="stylesheet">
+    </head>
+    
+    <!-- HTML code from Bootply.com editor -->
+    
+    <body>
+        
+        <div class="page-container">
+  
+	<!-- top navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    	<div class="navbar-header">
+           <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".sidebar-nav">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+           </button>
+           <a class="navbar-brand" href="#">Working with Sensor Data</a>
+    	</div>
+    </div>
+      
+    <div class="col-sm-12">
+      <div class="row row-offcanvas row-offcanvas-left">
+        
+        <!-- sidebar -->
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div class="affix-top" data-spy="affix">
+            <ul class="nav nav-list">
+                <li><label class="tree-toggle nav-header">Datasets</label>
+                    <ul class="nav nav-list">
+                        <li><a href="#">Haze</a></li>
+                    </ul>
+                </li>
+                <li><label class="tree-toggle nav-header">Geospatial</label>
+                    <ul class="nav nav-list">
+                      <li><a href="geo_basics.html">Basics</a></li>
+                      <li><a href="geo_coding.html">Geocoding</a></li>
+                      <li><a href="geo_hashing.html">Geohashing</a></li>
+                      <li><a href="geo_maps.html">Maps</a></li>
+                      <li><a href="geo_gis.html">GIS</a></li>
+                      <li><a href="geo_db.html">Databases</a></li>
+                    </ul>
+                </li>
+            </ul>
+           </div>
+        </div>
+  	
+        <!-- main area -->
+        <div class="col-xs-12 col-sm-9" data-spy="scroll" data-target="#sidebar-nav">
+          
+          
+          <h1 id="section1">Haze Datasets</h1>
+          
+          <blockquote><p>The 2015 Southeast Asian haze was an air pollution crisis affecting several countries in Southeast Asia, including Brunei, Indonesia (especially its islands of Sumatra and Kalimantan), Malaysia, Singapore, Southern Thailand, and Vietnam, Cambodia and the Philippines.</p>
+
+          <p>The haze has affected Indonesia from at least late June, eventually turning into an international problem for other countries from September. It is the latest occurrence of the Southeast Asian haze, a long-term issue that occurs in varying intensity during every dry season in the region. It is caused by forest fires resulting from illegal slash-and-burn practices, principally on the Indonesian islands of Sumatra and Kalimantan, which can then spread quickly in the dry season.</p></blockquote>
+
+          <p><a href="https://en.wikipedia.org/wiki/2015_Southeast_Asian_haze">2015 Southeast Asian Haze</a> on Wikipedia (Retrieved 1 Dec 2015)</p>
+    
+          <h2 id="section2">Global Fire Emissions Database</h2>
+          <p>Fires are an important source of atmospheric trace gases and aerosols and they are the most important disturbance agent on a global scale. In addition, deforestation and tropical peatland fires and areas that see an increase in the frequency of fires add to the build-up of atmospheric CO2.
+
+We have combined satellite information on fire activity and vegetation productivity to estimate gridded monthly burned area and fire emissions, as well as scalars that can be used to calculate higher temporal resolution emissions. 
+          </p>
+          <p><iframe width="560" height="315" src="https://www.youtube.com/embed/2RQkGXuGg6s" frameborder="0" allowfullscreen></iframe>
+          <iframe width="420" height="315" src="https://www.youtube.com/embed/hf8Vpl2xOE4" frameborder="0" allowfullscreen></iframe>
+          <br>A heatmap of the GFED data, constrained to the SE Asian region of the haze and played across time.</p>
+          <br>
+            <a href="https://webobservatory.soton.ac.uk/wo/dataset/?kw=haze" target="_blank"><button class="btn btn-primary">On the Web Observatory</button></a>
+            <a href="http://www.globalfiredata.org/data.html" target="_blank"><button class="btn btn-primary">Source</button></a>        
+          <br>
+
+          <h2 id="section3">Active Fire Data from NASA</h2>
+          <p>The MODIS active fire product detects fires in 1km pixels that are burning at the time of overpass under relatively cloud-free conditions using a contextual algorithm, where thresholds are first applied to the observed middle–infrared and thermal infrared brightness temperature and then false detections are rejected by examining the brightness temperature relative to neighboring pixels (Giglio, L. et al. 2003).
+          </p>
+          <br>
+            <a href="active_fires.zip" target="_blank"><button class="btn btn-primary">Download CSV</button></a>
+            <a href="https://earthdata.nasa.gov/earth-observation-data/near-real-time/firms/active-fire-data" target="_blank"><button class="btn btn-primary">Source</button></a>        
+          <br>
+
+          <div class="clearfix"></div>
+          
+        </div><!-- /.col-xs-12 main -->
+    </div><!--/.row-->
+  </div><!--/.container-->
+</div><!--/.page-container-->
+
+
+<div id="footer"><!--footer-->
+  <div class="container">
+      	<div class="row">
+        <ul class="list-unstyled">
+            <li class="col-md-6 col-md-offset-3">
+          For <a href="http://webschool.sz.tsinghua.edu.cn/">WEB SCIENCE WINTER SCHOOL @CHINA 2015</a>. Uses <a href="http://usebootstrap.com/theme/holo">Bootrap Holo</a>.
+          </li>
+        </ul>
+		</div><!--/row-->
+
+  </div><!--/container-->
+</div><!--/footer-->
+</div>
+
+
+        
+        <script type="text/javascript" async="" src="assets/js/quant.js"></script>
+		</script><script type="text/javascript" src="assets/js/jquery.js"></script>
+        <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+        
+        <script type="text/javascript">
+        
+        $(document).ready(function() {
+            $('[data-toggle=offcanvas]').click(function() {
+				$('.row-offcanvas').toggleClass('active');
+			});
+			  
+			$('.btn-toggle').click(function() {
+				$(this).find('.btn').toggleClass('active').toggleClass('btn-default').toggleClass('btn-primary');
+			});
+        });
+        
+        </script>
+        
+    
+</body></html>
