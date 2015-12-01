@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta charset="utf-8">
+        <title>Working with Sensor Data</title>
+        <meta name="generator" content="Bootply">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="assets/css/bootstrap.css" rel="stylesheet">
+        
+        <!--[if lt IE 9]>
+          <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+		
+		<link href="assets/css/holo.css" rel="stylesheet">
+    </head>
+    
+    <!-- HTML code from Bootply.com editor -->
+    
+    <body>
+        
+        <div class="page-container">
+  
+	<!-- top navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    	<div class="navbar-header">
+           <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".sidebar-nav">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+           </button>
+           <a class="navbar-brand" href="#">Working with Sensor Data</a>
+    	</div>
+    </div>
+      
+    <div class="col-sm-12">
+      <div class="row row-offcanvas row-offcanvas-left">
+        
+        <!-- sidebar -->
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div class="affix-top" data-spy="affix">
+            <ul class="nav nav-list">
+                <li><label class="tree-toggle nav-header">Datasets</label>
+                    <ul class="nav nav-list">
+                        <li><a href="index.html">Haze</a></li>
+                    </ul>
+                </li>
+                <li><label class="tree-toggle nav-header">Geospatial</label>
+                    <ul class="nav nav-list">
+                      <li><a href="geo_basics.html">Basics</a></li>
+                      <li><a href="geo_coding.html">Geocoding</a></li>
+                      <li><a href="geo_hashing.html">Geohashing</a></li>
+                      <li><a href="geo_maps.html">Maps</a></li>
+                      <li><a href="geo_gis.html">GIS</a></li>
+                      <li><a href="geo_db.html">Databases</a></li>
+                    </ul>
+                </li>
+            </ul>
+           </div>
+        </div>
+  	
+        <!-- main area -->
+        <div class="col-xs-12 col-sm-9" data-spy="scroll" data-target="#sidebar-nav">
+          
+          
+          <h1 id="section1">Geohashing</h1>
+          
+          <h3>What is Geohashing?</h3>
+          <p>Geohashing is a very nifty algorithm for expressing geographic coordinates (lat,lon) as a short string that was invented by Gustavo Niemeyer. It exhibits some useful properties like arbitrary precision and the possibility of gradually removing characters from the end of the hash to reduce its size (and gradually lose precision). Furthermore, nearby places will often (but not always) present similar prefixes while the longer a shared prefix is, the closer the two places are.</p>
+
+          <p><em>It is a hierarchical spatial data structure which subdivides space into buckets of grid shape, which is one of the many applications of what is known as a Z-order curve, and generally space-filling curves.</em> - <a href="https://en.wikipedia.org/wiki/Geohash">Article on Wikipedia</a></p>
+
+          <p>For example, the <a href="http://geohash.org/gcp185c6kpxc">geohash of Southampton</a> is: <code>gcp185c6kpxc</code>
+          <br>and that of <a href="http://geohash.org/gcp1p6ght">neighbouring Portsmouth</a> is: <code>gcp1p6ght</code></p>
+
+          <p>Due to their proximity, they share the first characters of the hash <code>gcp1</code>.</p>
+
+          <h3>Limitations</h3>
+
+          <blockquote>One limitation of the Geohash algorithm is in attempting to utilize it to find points in proximity to each other based on a common prefix. Edge case locations close to each other but on opposite sides of the 180 degree meridian will result in Geohash codes with no common prefix (different longitudes for near physical locations). Points close by at the North and South poles will have very different geohashes (different longitudes for near physical locations).<br><br>
+
+          Two close locations on either side of the Equator (or Greenwich meridian) will not have a long common prefix since they belong to different 'halves' of the world. Put simply, one location's binary latitude (or longitude) will be 011111... and the other 100000...., so they will not have a common prefix and most bits will be flipped. This can also be seen as a consequence of relying on the Z-order curve (which could more appropriately be called an N-order visit in this case) for ordering the points, as two points close-by might be visited at very different times. However, two points with a long common prefix will be close-by.</blockquote>
+
+          <p>Article on Wikipedia</p>
+    
+          <h3>Using Geohashes</h3>
+          <p>A comprehensive list of geohashing implemenations are available <a href="http://wiki.xkcd.com/geohashing/Implementations">here</a>.</p>
+
+          <div class="clearfix"></div>
+          
+        </div><!-- /.col-xs-12 main -->
+    </div><!--/.row-->
+  </div><!--/.container-->
+</div><!--/.page-container-->
+
+
+<div id="footer"><!--footer-->
+  <div class="container">
+      	<div class="row">
+        <ul class="list-unstyled">
+            <li class="col-md-6 col-md-offset-3">
+          For <a href="http://webschool.sz.tsinghua.edu.cn/">WEB SCIENCE WINTER SCHOOL @CHINA 2015</a>. Uses <a href="http://usebootstrap.com/theme/holo">Bootrap Holo</a>.
+          </li>
+        </ul>
+		</div><!--/row-->
+
+  </div><!--/container-->
+</div><!--/footer-->
+</div>
+
+
+        
+        <script type="text/javascript" async="" src="assets/js/quant.js"></script>
+		</script><script type="text/javascript" src="assets/js/jquery.js"></script>
+        <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+        
+        <script type="text/javascript">
+        
+        $(document).ready(function() {
+            $('[data-toggle=offcanvas]').click(function() {
+				$('.row-offcanvas').toggleClass('active');
+			});
+			  
+			$('.btn-toggle').click(function() {
+				$(this).find('.btn').toggleClass('active').toggleClass('btn-default').toggleClass('btn-primary');
+			});
+        });
+        
+        </script>
+        
+    
+</body></html>
