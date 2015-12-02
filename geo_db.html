@@ -65,9 +65,20 @@
           <h1 id="section1">Geospatial Databases</h1>
           
           <h3>Postgres & PostGIS</h3>
-          <p></p>
+          <p>Postgres is an open source database that initially came from Stonebraker's group during his time at Berkeley. It has developed into one of the most advanced open source relational database systems and PostGIS is a powerful extension to the Postgres database that enables geospatial columns, indexing and functions.</p>
+
+          <p>The first order of things after installation is to create a database with the PostGIS extension. After that, a column with a geometry data type can be created. Geometry is a general data type for spatial data that can store either points or polygons.</p>
+
+          <pre><code>UPDATE landmarks
+SET the_geom = ST_GeomFromText('POINT(' || longitude || ' ' || latitude || ')',4326);</code></pre>
 
           <h3>MySQL MyISAM</h3>
+          <p></p>
+
+          <h3>Columnar Databases</h3>
+          <p></p>
+
+          <h3>Geospatial Databases</h3>
           <p></p>
 
           <div class="clearfix"></div>

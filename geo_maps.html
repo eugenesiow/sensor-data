@@ -12,6 +12,7 @@
         <![endif]-->
 		
 		<link href="assets/css/holo.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.css" rel="stylesheet">
     </head>
     
     <!-- HTML code from Bootply.com editor -->
@@ -71,7 +72,7 @@
 
           <h3>Basemaps, Tiles, Vectors</h3>
 
-          <p>Basemaps are the base layer of maps. Google for example, offers a choice of satellite/aerial maps and street maps layers as base maps. OpenStreetMaps (OSM) are focused on street maps as the base layer. Other providers like ESRI (ArcGIS) have good quality satellite/aerial/terrestrial base maps.</p>
+          <p>Basemaps are the base layer of maps. Google for example, offers a choice of satellite/aerial maps and street maps layers as base maps. OpenStreetMaps (OSM) are focused on street maps as the base layer. Other providers like ESRI (ArcGIS) have good quality satellite/aerial/terrestrial base maps. Basemaps are usually rendered in the browser and served from a server using a standard defined by the OGC (Open Geospatial Consortium), the <a href="http://www.opengeospatial.org/standards/wms">WMS (Web Map Service)</a>. </p>
 
           <p>OpenStreetMaps for example is a huge collection of data - streets, buildings, etc. are represented as points and polygons (geometry) and are rendered as tiles and served through various online map services. MapBox, for example, uses OSM data and uses a custom rendering engine to create beautiful maps. MapBox has a <a href="https://www.mapbox.com/tilemill/">TileMill</a> software that runs on your local machine and allows you to create maps from OSM data, style the maps and render them as tiles or save them in a more efficient SQLLite based format. <a href="https://www.mapbox.com/mapbox-studio/">MapBox Studio</a> is a powerful online version that allows you to design your own maps.</p>
 
@@ -81,7 +82,49 @@
 
           <h3>Vector Layers</h3>
 
-          <h3>Raster Layers</h3>
+          <p>What is a vector layer? A vector layer is a set of instructions that a machine can intepret, e.g. Draw a line from (x1,y1) to (x2,y2) and the line should be red in colour and with a stroke of 0.5in. The OGC (Open Geospatial Consortium) defines a <a href="http://live.osgeo.org/en/standards/wfs_overview.html">WFS (Web Feature Service)</a> standard for querying and editing vector geographic features, such as roads or lake outlines.</p>
+
+          <h3>Geographic Viz</h3>
+
+          <p>The OGC <a href="https://developers.google.com/kml/?hl=en">KML (Keyhole Markup Langauge)</a> Encoding Standard is an XML language focused on geographic visualization, including annotation of maps and images. Geographic visualization includes not only the presentation of graphical data on the globe, but also the control of the user’s navigation in the sense of where to go and where to look. An example KML snippet is shown below that describes a placemarker (think a pin on a map):</p>
+
+          <pre><code class="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;kml xmlns=&quot;http://www.opengis.net/kml/2.2&quot;&gt;
+  &lt;Placemark&gt;
+    &lt;name&gt;My office&lt;/name&gt;
+    &lt;description&gt;This is the location of my office.&lt;/description&gt;
+    &lt;Point&gt;
+      &lt;coordinates&gt;-122.087461,37.422069&lt;/coordinates&gt;
+    &lt;/Point&gt;
+  &lt;/Placemark&gt;
+&lt;/kml&gt;</code></pre>
+          
+          <h3>GeoJSON</h3>
+
+          <p>GeoJSON is a popular, elegant way of serving geographical data (features, areas, etc.) and the non-spatial data accompanying them (labels, values). MongoDB can serve and store GeoJSON objects and servers like <a href="http://docs.geoserver.org/latest/en/user/services/wfs/outputformats.html">GeoServer</a> and libraries like <a href="http://openlayers.org/en/master/examples/geojson.html">OpenLayers support</a> GeoJSON.</p>
+
+          <pre><code class="language-javascript">{
+  &quot;type&quot;: &quot;Feature&quot;,
+  &quot;geometry&quot;: {
+    &quot;type&quot;: &quot;Point&quot;,
+    &quot;coordinates&quot;: [125.6, 10.1]
+  },
+  &quot;properties&quot;: {
+    &quot;name&quot;: &quot;Dinagat Islands&quot;
+  }
+}</code></pre>
+
+          <p>You can play around with sandboxed GeoJSON data and a map at <a href="http://geojson.io/">geojson.io</a>.</p>
+
+          <h3>What is SVG?</h3>
+
+          <p>You might have heard of SVGs mentioned sometime when using the browser for viz. Scalable Vector Graphics or SVG is a format for defining graphics in a vector format which the browser will then draw. Scalable refers to the fact that it is possible to zoom these graphics without degredation in quality as they are a set of instructions and geometry where translations and scaling can be applied to and rendered by the browser.</p>
+
+          <p>Since SVG support in browsers is relatively mature (HTML 5 Canvas and WebGL are relatively newer technologies), many libraries default to SVG for defining overlays on maps. SVGs are actually a HTML like markup langauge for describing geometry to be drawn. Many libraries like D3.js support both SVG and HTML5 Canvas to allow interactive visualizations.</p>
+
+          <h3>Google Earth</h3>
+
+          <p><a href="https://www.google.co.uk/intl/en_uk/earth/">Google Earth</a> is a desktop virtual globe software that allows the visualisation of geospatial information. You can load KML/KMZ layers on the virtual globe. The globe is made up of satellite photographs stiched together and due to the globe based visualisation, reduces the effect of Mercator Projection. As of the time of writing (Dec 2015), this service is unavailable in China.</p>
 
           <div class="clearfix"></div>
           
@@ -106,7 +149,7 @@
 </div>
 
 
-        
+        <script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.js"></script>
         <script type="text/javascript" async="" src="assets/js/quant.js"></script>
 		</script><script type="text/javascript" src="assets/js/jquery.js"></script>
         <script type="text/javascript" src="assets/js/bootstrap.js"></script>
