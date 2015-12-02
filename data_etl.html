@@ -12,6 +12,7 @@
         <![endif]-->
 		
 		<link href="assets/css/holo.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.css" rel="stylesheet">
     </head>
     
     <!-- HTML code from Bootply.com editor -->
@@ -75,36 +76,20 @@
         <div class="col-xs-12 col-sm-9" data-spy="scroll" data-target="#sidebar-nav">
           
           
-          <h1 id="section1">Haze Datasets</h1>
+          <h1 id="section1">Extract, Transform, Load</h1>
+
+          <blockquote>In computing, Extract, Transform and Load (ETL) refers to a process in database usage and especially in data warehousing that: Extracts data from homogeneous or heterogeneous data sources. Transforms the data for storing it in proper format or structure for querying and analysis purpose.</blockquote>
+          Article on Wikipedia
           
-          <blockquote><p>The 2015 Southeast Asian haze was an air pollution crisis affecting several countries in Southeast Asia, including Brunei, Indonesia (especially its islands of Sumatra and Kalimantan), Malaysia, Singapore, Southern Thailand, and Vietnam, Cambodia and the Philippines.</p>
+          <h3>Pentaho Data Integration</h3>
+          <p>Formerly called Kettle, <a href="http://community.pentaho.com/projects/data-integration/">Pentaho Data Integration (Community)</a> is an open source tool writtten in Java that enables you to setup workflows for ETL processes. You can 'extract' data from databases, CSV, streams, 'transform' data using lookups, joins, aggregations and 'load' data into various databases.</p>
 
-          <p>The haze has affected Indonesia from at least late June, eventually turning into an international problem for other countries from September. It is the latest occurrence of the Southeast Asian haze, a long-term issue that occurs in varying intensity during every dry season in the region. It is caused by forest fires resulting from illegal slash-and-burn practices, principally on the Indonesian islands of Sumatra and Kalimantan, which can then spread quickly in the dry season.</p></blockquote>
+          <a href="http://wiki.pentaho.com/display/EAI/Pentaho+Data+Integration+Steps" target="_blank"><button class="btn btn-primary">List of Pentaho Steps</button></a>
 
-          <p><a href="https://en.wikipedia.org/wiki/2015_Southeast_Asian_haze">2015 Southeast Asian Haze</a> on Wikipedia (Retrieved 1 Dec 2015)</p>
-    
-          <h2 id="section2">Global Fire Emissions Database</h2>
-          <p>Fires are an important source of atmospheric trace gases and aerosols and they are the most important disturbance agent on a global scale. In addition, deforestation and tropical peatland fires and areas that see an increase in the frequency of fires add to the build-up of atmospheric CO2.
+          <h3>Managing Data Integration Flows</h3>
+          <p>If you are building a complex system that integrates data, processes it and visualises it you often need a piece of software called a messaging server to manage the flows of data. This is especially true for multiple sensor data inputs arriving as streams. There are many enterprise message brokers and some open source ones. <a href="https://www.rabbitmq.com/">RabbitMQ</a> and <a href="http://activemq.apache.org/">ActiveMQ</a> are two open source messaging servers. An elegant lightweight alternative is <a href="http://zeromq.org/">ZeroMQ</a> and a powerful scalable alternative that was developed internally by LinkedIn is <a href="http://kafka.apache.org/">Apache Kafka</a>. This well-written <a href="https://engineering.linkedin.com/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying">article</a> describes the design of Kafka.</p>
 
-We have combined satellite information on fire activity and vegetation productivity to estimate gridded monthly burned area and fire emissions, as well as scalars that can be used to calculate higher temporal resolution emissions. 
-          </p>
-          <p><iframe width="560" height="315" src="https://www.youtube.com/embed/2RQkGXuGg6s" frameborder="0" allowfullscreen></iframe>
-          <iframe width="420" height="315" src="https://www.youtube.com/embed/hf8Vpl2xOE4" frameborder="0" allowfullscreen></iframe>
-          <br>A heatmap of the GFED data, constrained to the SE Asian region of the haze and played across time.</p>
-          <br>
-            <a href="https://webobservatory.soton.ac.uk/wo/dataset/?kw=haze" target="_blank"><button class="btn btn-primary">On the Web Observatory</button></a>
-            <a href="http://www.globalfiredata.org/data.html" target="_blank"><button class="btn btn-primary">Source</button></a>        
-          <br>
-
-          <h2 id="section3">Active Fire Data from NASA</h2>
-          <p>The MODIS active fire product detects fires in 1km pixels that are burning at the time of overpass under relatively cloud-free conditions using a contextual algorithm, where thresholds are first applied to the observed middle–infrared and thermal infrared brightness temperature and then false detections are rejected by examining the brightness temperature relative to neighboring pixels (Giglio, L. et al. 2003).
-          </p>
-          <p><iframe width="560" height="315" src="https://www.youtube.com/embed/1BsV6T_a_AU" frameborder="0" allowfullscreen></iframe>
-          <br>A heatmap of the NASA Active Fire data mapped over time. Intensity is based on brightness value.</p>
-          <br>
-            <a href="active_fires.zip" target="_blank"><button class="btn btn-primary">Download CSV</button></a>
-            <a href="https://earthdata.nasa.gov/earth-observation-data/near-real-time/firms/active-fire-data" target="_blank"><button class="btn btn-primary">Source</button></a>        
-          <br>
+          <p>The important concept used to manage data flows here is the publish-subscribe mechanism. In general, you have topics and queues and you have consumers and producers. There are some variations like durable subscribers to topics, etc. A topic broadcasts all messages published to it to all its active consumers. Whereas when a consumer consumes a message from a queue, it is no longer in the queue and any other consumer will not receive the message. If a consumer is offline it does not receive messages from the topic (these messages are lost) except in the case of durable subscribers, whereas for a queue, if a consumer is offline, the message remains in the queue till it is consumed when the consumer comes back online.</p>
 
           <div class="clearfix"></div>
           
@@ -129,9 +114,10 @@ We have combined satellite information on fire activity and vegetation productiv
 </div>
 
 
-        
-        <script type="text/javascript" async="" src="assets/js/quant.js"></script>
-		</script><script type="text/javascript" src="assets/js/jquery.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.js"></script>
+        <script type="text/javascript" src="assets/js/prism-sql.min.js"></script>
+        <script type="text/javascript" src="assets/js/quant.js"></script>
+		    <script type="text/javascript" src="assets/js/jquery.js"></script>
         <script type="text/javascript" src="assets/js/bootstrap.js"></script>
         
         <script type="text/javascript">

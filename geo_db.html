@@ -12,6 +12,7 @@
         <![endif]-->
 		
 		<link href="assets/css/holo.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.css" rel="stylesheet">
     </head>
     
     <!-- HTML code from Bootply.com editor -->
@@ -54,6 +55,19 @@
                       <li><a href="geo_db.html">Databases</a></li>
                     </ul>
                 </li>
+                <li><label class="tree-toggle nav-header">Sensor Data</label>
+                    <ul class="nav nav-list">
+                      <li><a href="data_etl.html">ETL</a></li>
+                      <li><a href="data_compress.html">Compress/Approx</a></li>
+                      <li><a href="data_viz.html">Viz</a></li>
+                    </ul>
+                </li>
+                <li><label class="tree-toggle nav-header">Tutorials</label>
+                      <ul class="nav nav-list">
+                      <li><a href="tutorial_wo.html">Web Observatory</a></li>
+                      <li><a href="tutorial_qgis.html">QGIS Timeline/Heatmap</a></li>
+                    </ul>
+                </li>
             </ul>
            </div>
         </div>
@@ -69,17 +83,56 @@
 
           <p>The first order of things after installation is to create a database with the PostGIS extension. After that, a column with a geometry data type can be created. Geometry is a general data type for spatial data that can store either points or polygons.</p>
 
-          <pre><code>UPDATE landmarks
+          <p>Lets say we have the 'latitude' and 'longitude' columns imported from a CSV file into a Postgres table called 'burningarea' and we have run an ALTER on the table to create a geom type column called 'the_geom', we just have to run an update on the table to set 'the_geom' column to create a geom from the 'latitude' and 'longitude' columns using EPSG 4326 projection standard.</p>
+
+          <pre><code class="language-sql">UPDATE burningarea
 SET the_geom = ST_GeomFromText('POINT(' || longitude || ' ' || latitude || ')',4326);</code></pre>
 
-          <h3>MySQL MyISAM</h3>
-          <p></p>
+          <p>PostGIS is powerful because it supports spatial functions. Functions with an ST (spatial type) prefix are spatial functions in PostGIS. These functions are divided into:</p>
+
+          <ul>
+            <li>Geometry Constructors</li>
+            <li>Geometry Accessors</li>
+            <li>Geometry Editors</li>
+            <li>Geometry Outputs</li>
+            <li>Operators</li>
+            <li>Spatial Relationships and Measurements</li>
+            <li>SFCGAL Functions</li>
+            <li>Geometry Processing</li>
+            <li>Linear Referencing</li>
+            <li>Temporal Support</li>
+          </ul>
+
+          <p>A full reference can be obtained from the <a href="http://postgis.net/docs/reference.html">postgis documentation</a>. However, I should point out that there are many useful functions, like the:</p>
+
+          <ul>
+            <li>ST_Distance — For geometry type Returns the 2D Cartesian distance between two geometries in projected units (based on spatial ref). For geography type defaults to return minimum geodesic distance between two geographies in meters.</li>
+            <li>ST_Covers — Returns 1 (TRUE) if no point in Geometry B is outside Geometry A</li>
+            <li>ST_Intersects — Returns TRUE if the Geometries/Geography "spatially intersect in 2D" - (share any portion of space) and FALSE if they don't (they are Disjoint). For geography -- tolerance is 0.00001 meters (so any points that close are considered to intersect)</li>
+            <li>ST_ConvexHull — The convex hull of a geometry represents the minimum convex geometry that encloses all geometries within the set.</li>
+            <li>ST_DWithin — Returns true if the geometries are within the specified distance of one another. For geometry units are in those of spatial reference and For geography units are in meters and measurement is defaulted to use_spheroid=true (measure around spheroid), for faster check, use_spheroid=false to measure along sphere.</li>
+          </ul>
+
+          <p>Spatial indices are one of the greatest assets of PostGIS. The ST_DWithin function can determine the relationship between two geometries much faster by determining the relationship between the bounding boxes of the geometries. Indices take this concept one step further by indexing the bounding box of the geometry rather than the geometry itself.</p>
+
+          <p>Spatial indices are simple to create in PostGIS. The following commands would create an index on the geometry column of the haze table.</p>
+
+          <pre><code class="language-sql">CREATE INDEX haze_geom ON haze USING GIST (the_geom);</code></pre>
+
+          <p>A <a href="http://revenant.ca/www/postgis/workshop/">comprehensive tutorial</a> to PostGIS is available from OSGeo.</p>
+
+          <a href="http://revenant.ca/www/postgis/workshop/" target="_blank"><button class="btn btn-primary">OSGeo PostGIS workshop</button></a>
+
+          <h3>MySQL</h3>
+          <p>MySQL has recently implemented some support for geospatial functions in its latest versions. The support is less mature than PostGIS, however, is useful if your data is already in a MySQL database. Here is the <a href="http://dev.mysql.com/doc/refman/5.7/en/spatial-extensions.html">reference</a> for the spatial extension.</p>
 
           <h3>Columnar Databases</h3>
-          <p></p>
+          <p>Columnar databases are relational databases that store data in column format rather than rows. There are a few advantages to this format. First of all because the data stored along a column is usually of similar type, it can often be compressed much more efficiently (think of a column storing the type of goods, there will be many repeats of a type like 'grocery' or 'office equipment' which can then be compressed much more). While retrieving columns from a database, if the query requires just 3 columns from a row with 10 columns, the entire row need not be retrieved. Together with saving storage space for headers and other benefits, columnar databases have been very popular with data warehousing systems. The disadvantage though is that although read performance is excellent, write performance requires some clever engineering to perform well. Generally the approach is to insert in-memory first and flush to disk the sorted columns (sorting enabled very good compression ratios).</p>
 
-          <h3>Geospatial Databases</h3>
-          <p></p>
+          <p>Columnar compression and faster access seems like an advantage for sensor data. One such advanced columnar store is <a href="https://www.vertica.com/">Vertica</a>, which has good performance in data warehousing and uses projections instead of indexes for speed. Vertica supports some <a href="https://my.vertica.com/docs/5.0/HTML/Master/15857.htm">spatial functions</a>, although not as complete as those offered by PostGIS.</p>
+
+          <h3>Others</h3>
+          <p>Some other databases support spatial extensions and while there are no leading out-of-the-box spatial databases, NoSQL alternatives like MongoDB have shown decent spatial support. <a href="https://docs.mongodb.org/manual/applications/geospatial-indexes/">MongoDB</a> supports spatial indexes and GeoJSON with a few functions like geoWithin. Cassandra (somewhat columnar) is a highly scalable, eventually consistent database. A startup tried that tried to use Cassandra to build a geospatial solution was <a href="http://www.slideshare.net/mmalone/scaling-gis-data-in-nonrelational-data-stores">SimpleGeo</a>.</p>
 
           <div class="clearfix"></div>
           
@@ -104,10 +157,11 @@ SET the_geom = ST_GeomFromText('POINT(' || longitude || ' ' || latitude || ')',4
 </div>
 
 
-        
-        <script type="text/javascript" async="" src="assets/js/quant.js"></script>
-		</script><script type="text/javascript" src="assets/js/jquery.js"></script>
+        <script type="text/javascript" src="assets/js/quant.js"></script>
+		    <script type="text/javascript" src="assets/js/jquery.js"></script>
         <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.js"></script>
+        <script type="text/javascript" src="assets/js/prism-sql.min.js"></script>
         
         <script type="text/javascript">
         
